@@ -15,7 +15,7 @@ end
 
 function createHole(x,y)
 	love.graphics.setCanvas(ground)
-		love.graphics.setColor(139, 115, 85, 100)
+		love.graphics.setColor(139, 115, 85, 255)
 		love.graphics.circle('fill', x, y-GroundY, 18, 111)
 	love.graphics.setCanvas()
 end
@@ -25,9 +25,12 @@ function drawGround()
 end
 
 function isOpenSpace(x,y)
+	if y < GroundY then return true end
+
 	data = ground:newImageData()
-	r,g,b,a = data:getPixel(x,y)
-	if a == 139 then
+	r,g,b,a = data:getPixel(x,y-GroundY)
+	print(r)
+	if r == 139 then
 		return true
 	end
 	return false
